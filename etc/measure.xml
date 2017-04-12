@@ -1,0 +1,281 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Dopamedia_Measure:etc/measure.xsd">
+
+    <family code="AREA" name="Area" standard="SQUARE_METER" sortOrder="10">
+        <unit code="SQUARE_MILLIMETRE" symbol="mm²" name="Square Millimetre" sortOrder="10">
+            <convert>
+                <strategy name="mul" value="0.000001"/>
+            </convert>
+        </unit>
+        <unit code="SQUARE_CENTIMETRE" symbol="cm²" name="Square Centimetre" sortOrder="20">
+            <convert>
+                <strategy name="mul" value="0.0001"/>
+            </convert>
+        </unit>
+        <unit code="SQUARE_DECIMETRE" symbol="dm²" name="Square Decimetre" sortOrder="30">
+            <convert>
+                <strategy name="mul" value="0.01"/>
+            </convert>
+        </unit>
+        <unit code="SQUARE_METRE" symbol="m²" name="Square Metre" sortOrder="40">
+            <convert>
+                <strategy name="mul" value="1"/>
+            </convert>
+        </unit>
+        <unit code="SQUARE_DEKAMETRE" symbol="dam²" name="Square Dekametre" sortOrder="50">
+            <convert>
+                <strategy name="mul" value="100"/>
+            </convert>
+        </unit>
+        <unit code="AR" symbol="a" name="Are" sortOrder="60">
+            <convert>
+                <strategy name="mul" value="100"/>
+            </convert>
+        </unit>
+        <unit code="SQUARE_HECTOMETRE" symbol="hm²" name="Square Hectometre" sortOrder="70">
+            <convert>
+                <strategy name="mul" value="10000"/>
+            </convert>
+        </unit>
+        <unit code="HECTARE" symbol="ha" name="Hectare" sortOrder="80">
+            <convert>
+                <strategy name="mul" value="10000"/>
+            </convert>
+        </unit>
+        <unit code="SQUARE_KILOMETRE" symbol="km²" name="Square Kilometre" sortOrder="90">
+            <convert>
+                <strategy name="mul" value="1000000"/>
+            </convert>
+        </unit>
+        <unit code="SQUARE_MIL" symbol="sq mil" name="Square Mil" sortOrder="100">
+            <convert>
+                <strategy name="mul" value="0.00000000064516"/>
+            </convert>
+        </unit>
+        <unit code="SQUARE_INCH" symbol="in²" name="Square Inch" sortOrder="110">
+            <convert>
+                <strategy name="mul" value="0.00064516"/>
+            </convert>
+        </unit>
+        <unit code="SQUARE_FOOT" symbol="ft²" name="Square Foot" sortOrder="120">
+            <convert>
+                <strategy name="mul" value="0.00064516"/>
+            </convert>
+        </unit>
+        <unit code="SQUARE_YARD" symbol="yd²" name="Square Yard" sortOrder="130">
+            <convert>
+                <strategy name="mul" value="0.83612736"/>
+            </convert>
+        </unit>
+        <unit code="SQUARE_YARD" symbol="yd²" name="Square Yard" sortOrder="140">
+            <convert>
+                <strategy name="mul" value="0.83612736"/>
+            </convert>
+        </unit>
+        <unit code="ACRE" symbol="A" name="Acre" sortOrder="150">
+            <convert>
+                <strategy name="mul" value="4046.856422"/>
+            </convert>
+        </unit>
+        <unit code="SQUARE_FURLONG" symbol="fur²" name="Square Furlong" sortOrder="160">
+            <convert>
+                <strategy name="mul" value="40468.726"/>
+            </convert>
+        </unit>
+        <unit code="SQUARE_MILE" symbol="mi²" name="Square Mile" sortOrder="170">
+            <convert>
+                <strategy name="mul" value="2589988.110336"/>
+            </convert>
+        </unit>
+    </family>
+
+    <family code="LENGTH" name="Length" standard="METRE" sortOrder="20">
+        <unit code="MILLIMETRE" symbol="mm" name="Millimetre" sortOrder="10">
+            <convert>
+                <strategy name="mul" value="0.001"/>
+            </convert>
+        </unit>
+        <unit code="CENTIMETRE" symbol="cm" name="Centimetre" sortOrder="20">
+            <convert>
+                <strategy name="mul" value="0.01"/>
+            </convert>
+        </unit>
+        <unit code="DECIMETRE" symbol="dm" name="Decimetre" sortOrder="30">
+            <convert>
+                <strategy name="mul" value="0.1"/>
+            </convert>
+        </unit>
+        <unit code="METRE" symbol="m" name="Metre" sortOrder="40">
+            <convert>
+                <strategy name="mul" value="1"/>
+            </convert>
+        </unit>
+        <unit code="DEKAMETRE" symbol="dam" name="Dekametre" sortOrder="50">
+            <convert>
+                <strategy name="mul" value="10"/>
+            </convert>
+        </unit>
+        <unit code="HECTOMETRE" symbol="hm" name="Hectometre" sortOrder="60">
+            <convert>
+                <strategy name="mul" value="100"/>
+            </convert>
+        </unit>
+        <unit code="KILOMETRE" symbol="km" name="Kilometre" sortOrder="70">
+            <convert>
+                <strategy name="mul" value="1000"/>
+            </convert>
+        </unit>
+        <unit code="MIL" symbol="mil" name="Thousandth of an inch" sortOrder="80">
+            <convert>
+                <strategy name="mul" value="0.0000254"/>
+            </convert>
+        </unit>
+        <unit code="INCH" symbol="in" name="Inch" sortOrder="90">
+            <convert>
+                <strategy name="mul" value="0.0254"/>
+            </convert>
+        </unit>
+        <unit code="FEET" symbol="ft" name="Feet" sortOrder="100">
+            <convert>
+                <strategy name="mul" value="0.3048"/>
+            </convert>
+        </unit>
+        <unit code="YARD" symbol="yd" name="Yard" sortOrder="110">
+            <convert>
+                <strategy name="mul" value="0.9144"/>
+            </convert>
+        </unit>
+        <unit code="CHAIN" symbol="ch" name="Chain" sortOrder="120">
+            <convert>
+                <strategy name="mul" value="20.1168"/>
+            </convert>
+        </unit>
+        <unit code="FURLONG" symbol="fur" name="Furlong" sortOrder="130">
+            <convert>
+                <strategy name="mul" value="201.168"/>
+            </convert>
+        </unit>
+        <unit code="Mile" symbol="mi" name="Mile" sortOrder="140">
+            <convert>
+                <strategy name="mul" value="1609.344"/>
+            </convert>
+        </unit>
+    </family>
+
+    <family code="VOLUME" name="Volume" standard="CUBIC_METER" sortOrder="30">
+        <unit code="CUBIC_MILLIMETRE" symbol="mm³" name="Cubic Metre" sortOrder="10">
+            <convert>
+                <strategy name="mul" value="0.000000001"/>
+            </convert>
+        </unit>
+        <unit code="CUBIC_CENTIMETER" symbol="cm³" name="Cubic Centimetre" sortOrder="20">
+            <convert>
+                <strategy name="mul" value="0.000001"/>
+            </convert>
+        </unit>
+        <unit code="MILLILITRE" symbol="ml" name="Millilitre" sortOrder="30">
+            <convert>
+                <strategy name="mul" value="0.000001"/>
+            </convert>
+        </unit>
+        <unit code="CENTILITRE" symbol="cl" name="Centilitre" sortOrder="40">
+            <convert>
+                <strategy name="mul" value="0.00001"/>
+            </convert>
+        </unit>
+        <unit code="DECILITRE" symbol="dl" name="Decilitre" sortOrder="50">
+            <convert>
+                <strategy name="mul" value="0.0001"/>
+            </convert>
+        </unit>
+        <unit code="CUBIC_DECIMETRE" symbol="dm³" name="Cubic Decimetre" sortOrder="60">
+            <convert>
+                <strategy name="mul" value="0.001"/>
+            </convert>
+        </unit>
+        <unit code="LITRE" symbol="l" name="Litre" sortOrder="70">
+            <convert>
+                <strategy name="mul" value="0.001"/>
+            </convert>
+        </unit>
+        <unit code="CUBIC_METRE" symbol="m³" name="Cubic Metre" sortOrder="80">
+            <convert>
+                <strategy name="mul" value="1"/>
+            </convert>
+        </unit>
+        <unit code="OUNCE" symbol="oz" name="Ounce" sortOrder="90">
+            <convert>
+                <strategy name="mul" value="0.00454609"/>
+                <strategy name="div" value="160"/>
+            </convert>
+        </unit>
+        <unit code="PINT" symbol="pt" name="Pint" sortOrder="100">
+            <convert>
+                <strategy name="mul" value="0.00454609"/>
+                <strategy name="div" value="8"/>
+            </convert>
+        </unit>
+        <unit code="BARREL" symbol="bbl" name="Barrel" sortOrder="110">
+            <convert>
+                <strategy name="mul" value="0.16365924"/>
+            </convert>
+        </unit>
+        <unit code="GALLON" symbol="gal" name="Gallon" sortOrder="120">
+            <convert>
+                <strategy name="mul" value="0.00454609"/>
+            </convert>
+        </unit>
+        <unit code="CUBIC_FOOT" symbol="ft³" name="Cubic Foot" sortOrder="130">
+            <convert>
+                <strategy name="mul" value="6.54119159"/>
+                <strategy name="div" value="231"/>
+            </convert>
+        </unit>
+        <unit code="CUBIC_INCH" symbol="in³" name="Cubic Inch" sortOrder="140">
+            <convert>
+                <strategy name="mul" value="0.0037854118"/>
+                <strategy name="div" value="231"/>
+            </convert>
+        </unit>
+        <unit code="CUBIC_YARD" symbol="yd³" name="Cubic Yard" sortOrder="150">
+            <convert>
+                <strategy name="mul" value="0.764554861"/>
+            </convert>
+        </unit>
+    </family>
+
+    <family code="WEIGHT" name="Weight" standard="KILOGRAM" sortOrder="40">
+        <unit code="MILLIGRAM" symbol="mg" name="Milligram" sortOrder="10">
+            <convert>
+                <strategy name="mul" value="0.000001"/>
+            </convert>
+        </unit>
+        <unit code="GRAM" symbol="g" name="Gram" sortOrder="20">
+            <convert>
+                <strategy name="mul" value="0.001"/>
+            </convert>
+        </unit>
+        <unit code="KILOGRAM" symbol="k" name="Kilogram" sortOrder="30">
+            <convert>
+                <strategy name="mul" value="1"/>
+            </convert>
+        </unit>
+        <unit code="TON" symbol="t" name="Ton" sortOrder="40">
+            <convert>
+                <strategy name="mul" value="1000"/>
+            </convert>
+        </unit>
+        <unit code="OUNCE" symbol="oz" name="Ounce" sortOrder="50">
+            <convert>
+                <strategy name="mul" value="0.45359237"/>
+                <strategy name="div" value="16"/>
+            </convert>
+        </unit>
+        <unit code="POUND" symbol="lb" name="Pound" sortOrder="60">
+            <convert>
+                <strategy name="mul" value="0.45359237"/>
+            </convert>
+        </unit>
+    </family>
+</config>
