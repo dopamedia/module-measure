@@ -256,7 +256,7 @@
                 <strategy name="mul" value="0.001"/>
             </convert>
         </unit>
-        <unit code="KILOGRAM" symbol="k" name="Kilogram" sortOrder="30">
+        <unit code="KILOGRAM" symbol="kg" name="Kilogram" sortOrder="30">
             <convert>
                 <strategy name="mul" value="1"/>
             </convert>
