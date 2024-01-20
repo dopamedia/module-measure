@@ -7,29 +7,41 @@
 namespace Dopamedia\Measure\Test\Unit;
 
 use Dopamedia\Measure\Model\Config;
+use Magento\Framework\Config\CacheInterface;
+use Magento\Framework\Config\ReaderInterface;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 
-class ConfigTest extends \PHPUnit_Framework_TestCase
+class ConfigTest extends TestCase
 {
+
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\Config\ReaderInterface
+     * @var MockObject|ReaderInterface
      */
     protected $readerMock;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|\Magento\Framework\Config\CacheInterface
+     * @var MockObject|CacheInterface
      */
     protected $cacheMock;
 
-    protected function setUp()
+    public function testGetAllUnits()
     {
-        $this->readerMock = $this->getMock(
-            '\Magento\Framework\Config\ReaderInterface',
-            [],
-            [],
-            '',
-            false
-        );
-        $this->cacheMock = $this->getMock('Magento\Framework\Config\CacheInterface');
+        $value = [
+            'units' => [
+                'METRE' => [],
+                'FEET'  => []
+            ]
+        ];
+
+        $expected = [
+            'METRE' => [],
+            'FEET'  => []
+        ];
+
+        $this->cacheMock->expects($this->any())->method('load')->will($this->returnValue(serialize($value)));
+        $config = new Config($this->readerMock, $this->cacheMock, 'cache_id');
+        $this->assertEquals($expected, $config->getAllUnits());
     }
 
     public function testGetFamilies()
@@ -37,13 +49,13 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $value = [
             'families' => [
                 'LENGTH' => [
-                    'code' => 'LENGTH',
-                    'name' => 'Length',
+                    'code'     => 'LENGTH',
+                    'name'     => 'Length',
                     'standard' => 'METRE'
                 ],
                 'VOLUME' => [
-                    'code' => 'VOLUME',
-                    'name' => 'Volume',
+                    'code'     => 'VOLUME',
+                    'name'     => 'Volume',
                     'standard' => 'CUBIC_METRE'
                 ]
             ]
@@ -51,13 +63,13 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 
         $expected = [
             'LENGTH' => [
-                'code' => 'LENGTH',
-                'name' => 'Length',
+                'code'     => 'LENGTH',
+                'name'     => 'Length',
                 'standard' => 'METRE'
             ],
             'VOLUME' => [
-                'code' => 'VOLUME',
-                'name' => 'Volume',
+                'code'     => 'VOLUME',
+                'name'     => 'Volume',
                 'standard' => 'CUBIC_METRE'
             ]
         ];
@@ -72,16 +84,16 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $value = [
             'families' => [
                 'LENGTH' => [
-                    'code' => 'LENGTH',
-                    'name' => 'Length',
+                    'code'     => 'LENGTH',
+                    'name'     => 'Length',
                     'standard' => 'METRE'
                 ]
             ]
         ];
 
         $expected = [
-            'code' => 'LENGTH',
-            'name' => 'Length',
+            'code'     => 'LENGTH',
+            'name'     => 'Length',
             'standard' => 'METRE'
         ];
 
@@ -90,45 +102,25 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $config->getFamily('LENGTH'));
     }
 
-
-    public function testGetAllUnits()
-    {
-        $value = [
-            'units' => [
-                'METRE' => [],
-                'FEET' => []
-            ]
-        ];
-
-        $expected = [
-            'METRE' => [],
-            'FEET' => []
-        ];
-
-        $this->cacheMock->expects($this->any())->method('load')->will($this->returnValue(serialize($value)));
-        $config = new Config($this->readerMock, $this->cacheMock, 'cache_id');
-        $this->assertEquals($expected, $config->getAllUnits());
-    }
-
     public function testGetUnit()
     {
         $value = [
             'units' => [
                 'FEET' => [
-                    'family' => 'LENGTH',
-                    'code' => 'FEET',
-                    'symbol' => 'ft',
-                    'name' => 'Feet',
+                    'family'    => 'LENGTH',
+                    'code'      => 'FEET',
+                    'symbol'    => 'ft',
+                    'name'      => 'Feet',
                     'sortOrder' => 100
                 ]
             ]
         ];
 
         $expected = [
-            'family' => 'LENGTH',
-            'code' => 'FEET',
-            'symbol' => 'ft',
-            'name' => 'Feet',
+            'family'    => 'LENGTH',
+            'code'      => 'FEET',
+            'symbol'    => 'ft',
+            'name'      => 'Feet',
             'sortOrder' => 100
         ];
 
@@ -137,19 +129,43 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $config->getUnit('FEET'));
     }
 
-    public function testGetUnitSymbol()
+    public function testGetUnitConversionStrategies()
     {
         $value = [
             'units' => [
                 'FEET' => [
-                    'symbol' => 'ft'
+                    'code'                  => 'FEET',
+                    'conversion_strategies' => [
+                        'mul' => 0.3048,
+                        'div' => 10
+                    ]
+                ]
+            ]
+        ];
+
+        $expected = [
+            'mul' => 0.3048,
+            'div' => 10
+        ];
+
+        $this->cacheMock->expects($this->any())->method('load')->will($this->returnValue(serialize($value)));
+        $config = new Config($this->readerMock, $this->cacheMock, 'cache_id');
+        $this->assertEquals($expected, $config->getUnitConversionStrategies('FEET'));
+    }
+
+    public function testGetUnitFamilyCode()
+    {
+        $value = [
+            'units' => [
+                'FEET' => [
+                    'family' => 'LENGTH'
                 ]
             ]
         ];
 
         $this->cacheMock->expects($this->any())->method('load')->will($this->returnValue(serialize($value)));
         $config = new Config($this->readerMock, $this->cacheMock, 'cache_id');
-        $this->assertEquals('ft', $config->getUnitSymbol('FEET'));
+        $this->assertEquals('LENGTH', $config->getUnitFamilyCode('FEET'));
     }
 
     public function testGetUnitName()
@@ -182,42 +198,30 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(10, $config->getUnitSortOrder('FEET'));
     }
 
-    public function testGetUnitFamilyCode()
+    public function testGetUnitSymbol()
     {
         $value = [
             'units' => [
                 'FEET' => [
-                    'family' => 'LENGTH'
+                    'symbol' => 'ft'
                 ]
             ]
         ];
 
         $this->cacheMock->expects($this->any())->method('load')->will($this->returnValue(serialize($value)));
         $config = new Config($this->readerMock, $this->cacheMock, 'cache_id');
-        $this->assertEquals('LENGTH', $config->getUnitFamilyCode('FEET'));
+        $this->assertEquals('ft', $config->getUnitSymbol('FEET'));
     }
 
-    public function testGetUnitConversionStrategies()
+    protected function setUp(): void
     {
-        $value = [
-            'units' => [
-                'FEET' => [
-                    'code' => 'FEET',
-                    'conversion_strategies' => [
-                        'mul' => 0.3048,
-                        'div' => 10
-                    ]
-                ]
-            ]
-        ];
-
-        $expected = [
-            'mul' => 0.3048,
-            'div' => 10
-        ];
-
-        $this->cacheMock->expects($this->any())->method('load')->will($this->returnValue(serialize($value)));
-        $config = new Config($this->readerMock, $this->cacheMock, 'cache_id');
-        $this->assertEquals($expected, $config->getUnitConversionStrategies('FEET'));
+        $this->readerMock = $this->getMock(
+            '\Magento\Framework\Config\ReaderInterface',
+            [],
+            [],
+            '',
+            false
+        );
+        $this->cacheMock  = $this->getMock('Magento\Framework\Config\CacheInterface');
     }
 }

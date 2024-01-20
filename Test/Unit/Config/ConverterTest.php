@@ -7,15 +7,16 @@
 namespace Dopamedia\Measure\Test\Unit\Config;
 
 use Dopamedia\Measure\Model\Config\Converter;
+use PHPUnit\Framework\TestCase;
 
-class ConverterTest extends \PHPUnit_Framework_TestCase
+class ConverterTest extends TestCase
 {
     /**
      * @var Converter
      */
     private $converter;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->converter = new Converter();
     }

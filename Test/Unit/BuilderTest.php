@@ -7,26 +7,56 @@
 namespace Dopamedia\Measure\Test\Unit;
 
 use Dopamedia\Measure\Api\Data\UnitInterface;
+use Dopamedia\Measure\Api\Data\UnitInterfaceFactory;
 use Dopamedia\Measure\Model\Builder;
+use Dopamedia\Measure\Model\ConfigInterface;
+use Magento\Framework\Exception\LocalizedException;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 
-class BuilderTest extends \PHPUnit_Framework_TestCase
+class BuilderTest extends TestCase
 {
+
     /**
      * @var Builder
      */
     protected $builder;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|\Dopamedia\Measure\Model\ConfigInterface
-     */
-    protected $configMock;
-
-    /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|\Dopamedia\Measure\Api\Data\UnitInterfaceFactory
+     * @var MockObject|UnitInterfaceFactory
      */
     protected $unitFactoryMock;
 
-    protected function setUp()
+    /**
+     * @var MockObject|ConfigInterface
+     */
+    protected $configMock;
+
+    public function testGetUnit()
+    {
+        $unitData = [
+            'name' => 'Kilo'
+        ];
+        $this->configMock->expects($this->any())->method('getUnit')->willReturn($unitData);
+        $unitMock = $this->getMock('Dopamedia\Measure\Api\Data\UnitInterface');
+        $this->unitFactoryMock->expects($this->once())
+            ->method('create')
+            ->with(['data' => $unitData])
+            ->willReturn($unitMock);
+        $unit = $this->builder->getUnit('UNIT');
+        $this->assertInstanceOf(UnitInterface::class, $unit);
+    }
+
+    /**
+     * @expectedException LocalizedException
+     */
+    public function testGetUnitThrowsException()
+    {
+        $this->configMock->expects($this->any())->method('getUnit')->willReturn([]);
+        $this->builder->getUnit('UNKNOWN');
+    }
+
+    protected function setUp(): void
     {
         $this->configMock = $this->getMock('Dopamedia\Measure\Model\ConfigInterface');
 
@@ -42,30 +72,6 @@ class BuilderTest extends \PHPUnit_Framework_TestCase
             $this->configMock,
             $this->unitFactoryMock
         );
-    }
-
-    /**
-     * @expectedException \Magento\Framework\Exception\LocalizedException
-     */
-    public function testGetUnitThrowsException()
-    {
-        $this->configMock->expects($this->any())->method('getUnit')->willReturn([]);
-        $this->builder->getUnit('UNKNOWN');
-    }
-
-    public function testGetUnit()
-    {
-        $unitData = [
-            'name' => 'Kilo'
-        ];
-        $this->configMock->expects($this->any())->method('getUnit')->willReturn($unitData);
-        $unitMock = $this->getMock('Dopamedia\Measure\Api\Data\UnitInterface');
-        $this->unitFactoryMock->expects($this->once())
-            ->method('create')
-            ->with(['data' => $unitData])
-            ->willReturn($unitMock);
-        $unit = $this->builder->getUnit('UNIT');
-        $this->assertInstanceOf(UnitInterface::class, $unit);
     }
 
 }
